@@ -4,6 +4,14 @@ This repository is created for **educational purposes** and to help developers f
 
 Currently, this is made only to bypass `game` that are protected from vulnerabilities like `ScriptContext:SaveScriptProfilingData`.
 
+# Usage
+
+To use this script, simply execute the following code in your Roblox executor:
+
+```Lua
+local bypassed_game = loadstring(game:HttpGet("https://raw.githubusercontent.com/dimbox-idk/env_escape/main/escape.lua"))()
+```
+
 ## Disclaimer
 
 By using this code, you are fully responsible for your actions. The author does not take any responsibility for any misuse or consequences resulting from the use of this code.
