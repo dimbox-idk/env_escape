@@ -2,6 +2,8 @@
 
 This repository is created for **educational purposes** and to help developers fix vulnerabilities in their code. The tools and scripts provided here are intended for use in **secure environments** only.
 
+Currently, this is made only to bypass `game` that are protected from vulnerabilities like `ScriptContext:SaveScriptProfilingData`.
+
 ## Disclaimer
 
 By using this code, you are fully responsible for your actions. The author does not take any responsibility for any misuse or consequences resulting from the use of this code.
