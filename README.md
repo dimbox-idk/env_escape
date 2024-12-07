@@ -12,12 +12,12 @@ Please ensure that you are in full compliance with all applicable laws and guide
 
 # License
 
-This project is licensed under the **Creative Commons Attribution-NonCommercial-ShareAlike 4.0 International License** (CC BY-NC-SA 4.0).
+This project is licensed under the **MIT License** with the following additional restriction:
 
 ## Terms:
 
 - **Attribution**: You must give appropriate credit to the original author(s), provide a link to the license, and indicate if changes were made. You may do this in any reasonable manner, but not in any way that suggests the author(s) endorse you or your use.
-- **Non-Commercial**: You may not use the material for commercial purposes.
+- **Non-Commercial**: You may not use the material for commercial purposes. **Please do not sell the code or use it to create products or services that are sold.**
 - **ShareAlike**: If you modify or build upon the work, you must distribute your contributions under the same license.
 
-For more details, see the full [CC BY-NC-SA 4.0 License](https://creativecommons.org/licenses/by-nc-sa/4.0/).
+For more details, see the full [MIT License](https://opensource.org/licenses/MIT).
