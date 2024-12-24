@@ -69,8 +69,8 @@ local test = function(func, type_f, method, args)
 	)()
 	return bypassed
 end
-result = test("Game", ":", [[GetService("ScriptContext"):SaveScriptProfilingData("test.exe", ":troll:")]], {})
+result = test("Game", ":", [[GetService("ScriptContext"):SaveScriptProfilingData]], {"test.exe", ":troll:"})
 if result ~= "Failed" then return result end
-result = test("game", ":", [[GetService("ScriptContext"):SaveScriptProfilingData("test.exe", ":troll:")]], {})
+result = test("game", ":", [[GetService("ScriptContext"):SaveScriptProfilingData]], {"test.exe", ":troll:"})
 if result ~= "Failed" then return result end
 return "Failed"
