@@ -28,7 +28,7 @@ local test = function(func, type_f, method, args)
     	result, _ = pcall(function()
 		    loadstring(
 	    	    [[
-		    	    getfenv()]] .. func .. "." .. method .. [[(table.unpack(args))
+		    	    getfenv().]] .. func .. "." .. method .. [[(table.unpack(args))
 		        ]]
 	        )()
 	    end)
@@ -36,7 +36,7 @@ local test = function(func, type_f, method, args)
         result, _ = pcall(function()
             loadstring(
 	    	    [[
-		        	getfenv()]] .. func .. ":" .. method .. [[(table.unpack(args))
+		        	getfenv().]] .. func .. ":" .. method .. [[(table.unpack(args))
 		        ]]
             )()
         end)
