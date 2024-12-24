@@ -25,6 +25,8 @@ local test = function(func, type_f, method, args)
     end
 	func_2 = nil
 	if type_f == "." then
+        print(".")
+        print([[getfenv().]] .. func .. "." .. method .. [[(table.unpack(args))]])
     	result, _ = pcall(function()
 		    loadstring(
 	    	    [[
@@ -33,6 +35,8 @@ local test = function(func, type_f, method, args)
 	        )()
 	    end)
 	else
+        print(":")
+        print([[getfenv().]] .. func .. ":" .. method .. [[(table.unpack(args))]])
         result, _ = pcall(function()
             loadstring(
 	    	    [[
