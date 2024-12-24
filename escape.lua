@@ -2,6 +2,7 @@ if not getgenv then return "UnSupported", "getgenv = nil" end
 if not getgenv().game then return "UnSupported", "fake getgenv function, no game" end
 if not getgenv().Game then return "UnSupported", "fake getgenv function, no Game" end
 if not loadstring then return "UnSupported", "loadstring = nil" end
+if not getexecutorname then return "UnSupported", "getexecutorname = nil" end
 if clonefunction then
     if print ~= clonefunction(print) then
         local clonefunction = function(func) return func end
@@ -10,15 +11,13 @@ else
     local clonefunction = function(func) return func end
 end
 local cloneref = cloneref or getgenv().cloneref or nil
-pcall(function()
-    if cloneref then
-        if getgenv().game ~= cloneref(getgenv().game) then
-            cloneref = function(ref) return ref end
-        end
-    else
+if cloneref and not getexecutorname() == 'Xeno' then
+    if getgenv().game ~= cloneref(getgenv().game) then
         cloneref = function(ref) return ref end
     end
-end)
+else
+    cloneref = function(ref) return ref end
+end
 local cache = {}
 cache.game = getgenv().game
 cache.Game = getgenv().Game
