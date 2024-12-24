@@ -1,10 +1,20 @@
 if not getgenv then return "UnSupported", "getgenv = nil" end
-if not getgenv().game then return "UnSupported", "fake getgenv function" end
+if not getgenv().game then return "UnSupported", "fake getgenv function, no game" end
+if not getgenv().Game then return "UnSupported", "fake getgenv function, no Game" end
 if not loadstring then return "UnSupported", "loadstring = nil" end
 if clonefunction then
     if print ~= clonefunction(print) then
         local clonefunction = function(func) return func end
     end
+else
+    local clonefunction = function(func) return func end
+end
+if cloneref then
+    if getgenv().game ~= cloneref(getgenv().game) then
+        local cloneref = function(ref) return ref end
+    end
+else
+    local cloneref = function(ref) return ref end
 end
 local cache = {}
 cache.game = getgenv().game
