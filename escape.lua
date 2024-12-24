@@ -1,20 +1,21 @@
 if not getgenv then return "UnSupported", "getgenv = nil" end
-if not type(getgenv) == 'function' then return "UnSupported", "getgenv != function" end
+if type(getgenv) ~= 'function' then return "UnSupported", "getgenv != function" end
 if not getgenv().game then return "UnSupported", "fake getgenv function, no game" end
 if not getgenv().Game then return "UnSupported", "fake getgenv function, no Game" end
 if not loadstring then return "UnSupported", "loadstring = nil" end
-if not type(loadstring) == 'function' then return "UnSupported", "loadstring != function" end
+if type(loadstring) ~= 'function' then return "UnSupported", "loadstring != function" end
 if not getexecutorname then return "UnSupported", "getexecutorname = nil" end
-if not type(getexecutorname) == 'function' then return "UnSupported", "getexecutorname != function" end
+if type(getexecutorname) ~= 'function' then return "UnSupported", "getexecutorname != function" end
+local clonefunction = clonefunction or getgenv().clonefunction or nil
 if clonefunction then
     if print ~= clonefunction(print) then
-        local clonefunction = function(func) return func end
+        clonefunction = function(func) return func end
     end
 else
-    local clonefunction = function(func) return func end
+    clonefunction = function(func) return func end
 end
 local cloneref = cloneref or getgenv().cloneref or nil
-if cloneref and not getexecutorname() == 'Xeno' then
+if cloneref and getexecutorname() ~= 'Xeno' then
     if getgenv().game ~= cloneref(getgenv().game) then
         cloneref = function(ref) return ref end
     end
