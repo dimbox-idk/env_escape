@@ -9,13 +9,16 @@ if clonefunction then
 else
     local clonefunction = function(func) return func end
 end
-if cloneref then
-    if getgenv().game ~= cloneref(getgenv().game) then
-        local cloneref = function(ref) return ref end
+local cloneref = cloneref or getgenv().cloneref or nil
+pcall(function()
+    if cloneref then
+        if getgenv().game ~= cloneref(getgenv().game) then
+            cloneref = function(ref) return ref end
+        end
+    else
+        cloneref = function(ref) return ref end
     end
-else
-    local cloneref = function(ref) return ref end
-end
+end)
 local cache = {}
 cache.game = getgenv().game
 cache.Game = getgenv().Game
