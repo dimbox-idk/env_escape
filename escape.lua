@@ -1,8 +1,11 @@
 if not getgenv then return "UnSupported", "getgenv = nil" end
+if not type(getgenv) == 'function' then return "UnSupported", "getgenv != function" end
 if not getgenv().game then return "UnSupported", "fake getgenv function, no game" end
 if not getgenv().Game then return "UnSupported", "fake getgenv function, no Game" end
 if not loadstring then return "UnSupported", "loadstring = nil" end
+if not type(loadstring) == 'function' then return "UnSupported", "loadstring != function" end
 if not getexecutorname then return "UnSupported", "getexecutorname = nil" end
+if not type(getexecutorname) == 'function' then return "UnSupported", "getexecutorname != function" end
 if clonefunction then
     if print ~= clonefunction(print) then
         local clonefunction = function(func) return func end
