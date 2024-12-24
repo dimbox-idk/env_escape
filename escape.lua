@@ -16,7 +16,7 @@ local test = function(func, type_f, method, args)
 	if type(func) ~= "string" then return error("func need to be string of function name in getgenv!") end
 	if type(type_f) ~= "string" then return error("type need to be . or :!") end
     local func_2 = getgenv()[func]
-    cache[func] = clonefunction(func_2)
+    cache[func] = cloneref(func_2)
 	func_2 = nil
 	if type_f == "." then
     	result, _ = pcall(function()
