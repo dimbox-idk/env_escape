@@ -29,7 +29,7 @@ local BYPASSED_GAME = loadstring([==[
                 print("BYPASSED_GAME")
                 return Game
             else
-	            return "Failed"
+	        return "Failed"
             end
         ]])()
     ]=])()
