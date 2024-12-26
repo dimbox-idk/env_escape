@@ -13,7 +13,7 @@ local bypassed_game = loadstring(game:HttpGet("https://raw.githubusercontent.com
 ```
 
 Full example:
-``Lua
+```Lua
 local bypassed_game, why = loadstring(game:HttpGet("https://raw.githubusercontent.com/dimbox-idk/env_escape/main/escape.lua"))()
 
 if bypassed_game ~= "Failed" and bypassed_game ~= "UnSupported" then
