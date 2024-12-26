@@ -1,7 +1,5 @@
 if not getgenv then return "UnSupported", "getgenv = nil" end
 if type(getgenv) ~= 'function' then return "UnSupported", "getgenv != function" end
-if not getgenv().game then return "UnSupported", "fake getgenv function, no game" end
-if not getgenv().Game then return "UnSupported", "fake getgenv function, no Game" end
 if not loadstring then return "UnSupported", "loadstring = nil" end
 if type(loadstring) ~= 'function' then return "UnSupported", "loadstring != function" end
 
@@ -12,9 +10,17 @@ cache.getgenv = getgenv
 
 getgenv().Game = nil
 local BYPASSED_GAME = loadstring([===[
+	if getgenv then getgenv().Game = nil end
+	getgenv = function() return { game = game } end
     return loadstring([==[
+		if getgenv then getgenv().Game = nil end
+	    getgenv = function() return { game = game } end
         return loadstring([=[
+			if getgenv then getgenv().Game = nil end
+	        getgenv = function() return { game = game } end
             return loadstring([[
+				if getgenv then getgenv().Game = nil end
+	            getgenv = function() return { game = game } end
                 local res, why = pcall(function()
                     local S = Game:GetService("ScriptContext")
 
@@ -24,15 +30,14 @@ local BYPASSED_GAME = loadstring([===[
                     local filereal = S:SaveScriptProfilingData(textToSave, file)
                 end)
                 if res then
-                    print("BYPASSED_GAME")
                     return Game
                 else
-	            return "Failed", why
+	                return why
                 end
             ]])()
         ]=])()
     ]==])()
 ]===])()
-getgenv().Game = Game
 getgenv = cache.getgenv
+getgenv().Game = Game
 return BYPASSED_GAME
