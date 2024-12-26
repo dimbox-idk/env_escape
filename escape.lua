@@ -12,11 +12,8 @@ cache.getgenv = getgenv
 
 getgenv().Game = nil
 local BYPASSED_GAME = loadstring([==[
-    local getgenv = function() return { game = game } end
     return loadstring([=[
-    	local getgenv = function() return { game = game } end
         return loadstring([[
-	        local getgenv = function() return { game = game } end
             local res, lol = pcall(function()
                 local S = Game:GetService("ScriptContext")
 
