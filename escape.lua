@@ -11,26 +11,28 @@ cache.Game = getgenv().Game
 cache.getgenv = getgenv
 
 getgenv().Game = nil
-local BYPASSED_GAME = loadstring([==[
-    return loadstring([=[
-        return loadstring([[
-            local res, lol = pcall(function()
-                local S = Game:GetService("ScriptContext")
+local BYPASSED_GAME = loadstring([===[
+    loadstring([==[
+        return loadstring([=[
+            return loadstring([[
+                local res, why = pcall(function()
+                    local S = Game:GetService("ScriptContext")
 
-                local file = "BYPASSED_GAME_TEST.TXT"
+                    local file = "BYPASSED_GAME_TEST.TXT"
 
-                local textToSave = "TEST"
-                local filereal = S:SaveScriptProfilingData(textToSave, file)
-            end)
-            if res then
-                print("BYPASSED_GAME")
-                return Game
-            else
-	        return "Failed"
-            end
-        ]])()
-    ]=])()
-]==])()
+                    local textToSave = "TEST"
+                    local filereal = S:SaveScriptProfilingData(textToSave, file)
+                end)
+                if res then
+                    print("BYPASSED_GAME")
+                    return Game
+                else
+	            return "Failed", why
+                end
+            ]])()
+        ]=])()
+    ]==])()
+]===])()
 getgenv().Game = Game
 getgenv = cache.getgenv
 return BYPASSED_GAME
