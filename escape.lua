@@ -12,7 +12,7 @@ cache.getgenv = getgenv
 
 getgenv().Game = nil
 local BYPASSED_GAME = loadstring([===[
-    loadstring([==[
+    return loadstring([==[
         return loadstring([=[
             return loadstring([[
                 local res, why = pcall(function()
