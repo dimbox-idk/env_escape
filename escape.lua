@@ -9,6 +9,13 @@ cache.Game = getgenv().Game
 cache.getgenv = getgenv
 
 getgenv().Game = nil
+Game = nil
+getfenv().Game = nil
+getfenv(0).Game = nil
+getfenv(1).Game = nil
+
+getgenv = function() return { game = game } end
+
 local BYPASSED_GAME = loadstring([===[
 	if getgenv then getgenv().Game = nil end
 	getgenv = function() return { game = game } end
@@ -39,5 +46,9 @@ local BYPASSED_GAME = loadstring([===[
     ]==])()
 ]===])()
 getgenv = cache.getgenv
-getgenv().Game = Game
+getgenv().Game = cache.Game
+Game = cache.Game
+getfenv().Game = cache.Game
+getfenv(0).Game = cache.Game
+getfenv(1).Game = cache.Game
 return BYPASSED_GAME
