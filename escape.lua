@@ -27,24 +27,6 @@ local function s(i, v)
     getfenv(debug.info(2, "f"))[i] = v;
 end
 
-getgenv = nil;
-local FAKE_ENV = {};
-
-function getgenv()
-    return FAKE_ENV;
-end
-
-FAKE_ENV = { game = game, loadstring = loadstring, getgenv = getgenv };
-
-s("getgenv", getgenv);
-
-setmetatable(getgenv(), {
-    __newindex = function(arg1, arg2, arg3)
-        rawset(arg1, arg2, arg3);
-        s(arg2, arg3);
-    end;
-});
-
 local BYPASSED_ENV = loadstring([===[
     getgenv = nil
     local FAKE_ENV = {}
