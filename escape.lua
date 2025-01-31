@@ -75,6 +75,10 @@ local BYPASSED_ENV = loadstring([===[
         end;
     })
 
+    for i, v in pairs(getgenv()) do
+        s(tostring(i), v)
+    end
+
     getfenv(loadstring).getgenv = getgenv
 
     return loadstring([===[
@@ -102,6 +106,10 @@ local BYPASSED_ENV = loadstring([===[
                 s(arg2, arg3)
             end;
         })
+
+        for i, v in pairs(getgenv()) do
+            s(tostring(i), v)
+        end
 
         getfenv(loadstring).getgenv = getgenv
 
@@ -131,6 +139,10 @@ local BYPASSED_ENV = loadstring([===[
                 end;
             })
 
+            for i, v in pairs(getgenv()) do
+                s(tostring(i), v)
+            end
+
             getfenv(loadstring).getgenv = getgenv
 
             return loadstring([[
@@ -159,6 +171,10 @@ local BYPASSED_ENV = loadstring([===[
                     end;
                 })
 
+                for i, v in pairs(getgenv()) do
+                    s(tostring(i), v)
+                end
+
                 getfenv(loadstring).getgenv = getgenv
 
                 local res, why = pcall(function()
@@ -171,7 +187,6 @@ local BYPASSED_ENV = loadstring([===[
                 if res then
                     local env = getfenv(0)
                     env.game = Game
-                    env.getgenv().getgenv = nil
                     env.getgenv = nil
                     env.loadstring = nil
                     return env
