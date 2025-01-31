@@ -27,7 +27,7 @@ local function s(i, v)
     getfenv(debug.info(2, "f"))[i] = v;
 end
 
-local BYPASSED_ENV = loadstring([===[
+local BYPASSED_ENV = loadstring([====[
     getgenv = nil
     local FAKE_ENV = {}
     getgenv = function() return FAKE_ENV end
@@ -81,7 +81,7 @@ local BYPASSED_ENV = loadstring([===[
             s(tostring(i), v)
         end
 
-        return loadstring([=[
+        return loadstring([==[
             if getgenv then getgenv().getgenv = nil end
             getgenv = nil
             local FAKE_ENV = {}
@@ -111,7 +111,7 @@ local BYPASSED_ENV = loadstring([===[
                 s(tostring(i), v)
             end
 
-            return loadstring([[
+            return loadstring([=[
                 getgenv = nil
                 local FAKE_ENV = {}
                 getgenv = function() return FAKE_ENV end
@@ -157,10 +157,10 @@ local BYPASSED_ENV = loadstring([===[
                 else
                     return why
                 end
-            ]])()
-        ]=])()
-    ]==])()
-]===])();
+            ]=])()
+        ]==])()
+    ]===])()
+]====])();
 
 getgenv = cache.getgenv;
 s("getgenv", cache.getgenv)
