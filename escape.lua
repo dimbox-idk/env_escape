@@ -27,16 +27,39 @@ local function s(i, v)
     getfenv(debug.info(2, "f"))[i] = v;
 end
 
+getgenv = nil;
+local FAKE_ENV = {};
+function getgenv2()
+    return FAKE_ENV;
+end
+FAKE_ENV = { game = game, loadstring = loadstring, getgenv = getgenv2 };
+s("getgenv", getgenv2);
+setmetatable(getgenv2(), {
+    __newindex = function(arg1, arg2, arg3)
+        rawset(arg1, arg2, arg3);
+        s(arg2, arg3);
+    end;
+});
+
+getfenv(loadstring).getgenv = getgenv2;
+
+getgenv = getgenv2
+
 local BYPASSED_ENV = loadstring([====[
+    if getgenv then getgenv().getgenv = nil end
     getgenv = nil
     local FAKE_ENV = {}
     getgenv = function() return FAKE_ENV end
     FAKE_ENV = { game = game, loadstring = loadstring, getgenv = getgenv }
     
     local function s(i, v)
+        getfenv(2)[i] = v
+        getfenv(1)[i] = v
         getfenv(0)[i] = v
         getfenv()[i] = v
         getfenv(debug.info(0, 'f'))[i] = v
+        getfenv(debug.info(1, 'f'))[i] = v
+        getfenv(debug.info(2, 'f'))[i] = v
     end
 
     s("getgenv", getgenv)
@@ -52,7 +75,10 @@ local BYPASSED_ENV = loadstring([====[
         s(tostring(i), v)
     end
 
+    getfenv(loadstring).getgenv = getgenv
+
     return loadstring([===[
+        if getgenv then getgenv().getgenv = nil end
         getgenv = nil
         local FAKE_ENV = {}
         getgenv = function() return FAKE_ENV end
@@ -80,6 +106,8 @@ local BYPASSED_ENV = loadstring([====[
         for i, v in pairs(getgenv()) do
             s(tostring(i), v)
         end
+
+        getfenv(loadstring).getgenv = getgenv
 
         return loadstring([==[
             if getgenv then getgenv().getgenv = nil end
@@ -111,7 +139,10 @@ local BYPASSED_ENV = loadstring([====[
                 s(tostring(i), v)
             end
 
+            getfenv(loadstring).getgenv = getgenv
+
             return loadstring([=[
+                if getgenv then getgenv().getgenv = nil end
                 getgenv = nil
                 local FAKE_ENV = {}
                 getgenv = function() return FAKE_ENV end
@@ -140,6 +171,8 @@ local BYPASSED_ENV = loadstring([====[
                     s(tostring(i), v)
                 end
 
+                getfenv(loadstring).getgenv = getgenv
+
                 local res, why = pcall(function()
                     local S = Game:GetService("ScriptContext")
                     local file = "BYPASSED_ENV_TEST.EXE"
@@ -164,5 +197,6 @@ local BYPASSED_ENV = loadstring([====[
 
 getgenv = cache.getgenv;
 s("getgenv", cache.getgenv)
+getfenv(loadstring).getgenv = cache.getgenv;
 
 return BYPASSED_ENV;
