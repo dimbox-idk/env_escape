@@ -5,7 +5,7 @@ if type(loadstring) ~= 'function' then return "UnSupported", "loadstring != func
 
 local cache = {}
 cache.getgenv = getgenv
-
+getgenv().getgenv = nil
 getgenv = nil
 getgenv = function() return { game = game } end
 local function s(i, v)
@@ -22,6 +22,7 @@ s("getgenv", function() return { game = game } end)
 getfenv(loadstring).getgenv = getgenv
 
 local BYPASSED_ENV = loadstring([===[
+    if getgenv then getgenv().getgenv = nil end
 	getgenv = nil
 	getgenv = function() return { game = game } end
     local function s(i, v)
@@ -35,6 +36,7 @@ local BYPASSED_ENV = loadstring([===[
 	s("getgenv", nil)
 	s("getgenv", function() return { game = game } end)
     return loadstring([==[
+	    if getgenv then getgenv().getgenv = nil end
 		getgenv = nil
 	    getgenv = function() return { game = game } end
         local function s(i, v)
@@ -48,6 +50,7 @@ local BYPASSED_ENV = loadstring([===[
 	    s("getgenv", nil)
 	    s("getgenv", function() return { game = game } end)
         return loadstring([=[
+	        if getgenv then getgenv().getgenv = nil end
 			getgenv = nil
 	        getgenv = function() return { game = game } end
             local function s(i, v)
@@ -61,6 +64,7 @@ local BYPASSED_ENV = loadstring([===[
 	        s("getgenv", nil)
 	        s("getgenv", function() return { game = game } end)
             return loadstring([[
+	            if getgenv then getgenv().getgenv = nil end
 				getgenv = nil
 	            getgenv = function() return { game = game } end
                 local function s(i, v)
