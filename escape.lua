@@ -28,7 +28,6 @@ local function s(i, v)
 end
 
 pcall(function()
-getgenv().getgenv = nil;
 getgenv = nil;
 local FAKE_ENV = {};
 
