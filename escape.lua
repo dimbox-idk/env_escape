@@ -48,7 +48,6 @@ setmetatable(getgenv(), {
 getfenv(loadstring).getgenv = getgenv;
 
 local BYPASSED_ENV = loadstring([===[
-    if getgenv then getgenv().getgenv = nil end
     getgenv = nil
     local FAKE_ENV = {}
     getgenv = function() return FAKE_ENV end
@@ -80,7 +79,6 @@ local BYPASSED_ENV = loadstring([===[
     getfenv(loadstring).getgenv = getgenv
 
     return loadstring([===[
-        if getgenv then getgenv().getgenv = nil end
         getgenv = nil
         local FAKE_ENV = {}
         getgenv = function() return FAKE_ENV end
