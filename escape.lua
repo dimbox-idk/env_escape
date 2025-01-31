@@ -15,21 +15,25 @@ local BYPASSED_ENV = loadstring([===[
 	getgenv = function() return { game = game } end
 	getfenv(debug.info(0, 'f')).getgenv = getgenv
 	getfenv(debug.info(1, 'f')).getgenv = getgenv
+	getfenv(debug.info(2, 'f')).getgenv = getgenv
     return loadstring([==[
 		if getgenv then getgenv = nil end
 	    getgenv = function() return { game = game } end
         getfenv(debug.info(0, 'f')).getgenv = getgenv
 	    getfenv(debug.info(1, 'f')).getgenv = getgenv
+	    getfenv(debug.info(2, 'f')).getgenv = getgenv
         return loadstring([=[
 			if getgenv then getgenv = nil end
 	        getgenv = function() return { game = game } end
 	        getfenv(debug.info(0, 'f')).getgenv = getgenv
 	        getfenv(debug.info(1, 'f')).getgenv = getgenv
+		    getfenv(debug.info(2, 'f')).getgenv = getgenv
             return loadstring([[
 				if getgenv then getgenv = nil end
 	            getgenv = function() return { game = game } end
 	            getfenv(debug.info(0, 'f')).getgenv = getgenv
 	            getfenv(debug.info(1, 'f')).getgenv = getgenv
+	            getfenv(debug.info(2, 'f')).getgenv = getgenv
                 local res, why = pcall(function() -- help me to replace that check please
                     local S = Game:GetService("ScriptContext")
 
