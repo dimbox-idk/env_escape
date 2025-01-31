@@ -7,35 +7,67 @@ local cache = {}
 cache.getgenv = getgenv
 
 getgenv = nil
-
 getgenv = function() return { game = game } end
+local function s(i, v)
+	getfenv(2)[i] = v
+    getfenv(1)[i] = v
+	getfenv(0)[i] = v
+	getfenv(debug.info(0, 'f'))[i] = v
+	getfenv(debug.info(1, 'f'))[i] = v
+	getfenv(debug.info(2, 'f'))[i] = v
+end
+s("getgenv", function() return { game = game } end)
 
 getfenv(loadstring).getgenv = getgenv
 
 local BYPASSED_ENV = loadstring([===[
-	if getgenv then getgenv = nil end
-	local getgenv = function() return { game = game } end
-	getfenv(debug.info(0, 'f')).getgenv = getgenv
-	getfenv(debug.info(1, 'f')).getgenv = getgenv
-	getfenv(debug.info(2, 'f')).getgenv = getgenv
+	getgenv = nil
+	getgenv = function() return { game = game } end
+    local function s(i, v)
+		getfenv(2)[i] = v
+        getfenv(1)[i] = v
+	    getfenv(0)[i] = v
+	    getfenv(debug.info(0, 'f'))[i] = v
+	    getfenv(debug.info(1, 'f'))[i] = v
+	    getfenv(debug.info(2, 'f'))[i] = v
+    end
+	s("getgenv", function() return { game = game } end)
     return loadstring([==[
-		if getgenv then getgenv = nil end
-	    local getgenv = function() return { game = game } end
-        getfenv(debug.info(0, 'f')).getgenv = getgenv
-	    getfenv(debug.info(1, 'f')).getgenv = getgenv
-	    getfenv(debug.info(2, 'f')).getgenv = getgenv
+		getgenv = nil
+	    getgenv = function() return { game = game } end
+        local function s(i, v)
+		    getfenv(2)[i] = v
+            getfenv(1)[i] = v
+	        getfenv(0)[i] = v
+	        getfenv(debug.info(0, 'f'))[i] = v
+	        getfenv(debug.info(1, 'f'))[i] = v
+	        getfenv(debug.info(2, 'f'))[i] = v
+        end
+	    s("getgenv", function() return { game = game } end)
         return loadstring([=[
-			if getgenv then getgenv = nil end
-	        local getgenv = function() return { game = game } end
-	        getfenv(debug.info(0, 'f')).getgenv = getgenv
-	        getfenv(debug.info(1, 'f')).getgenv = getgenv
-		    getfenv(debug.info(2, 'f')).getgenv = getgenv
+			getgenv = nil
+	        getgenv = function() return { game = game } end
+            local function s(i, v)
+		        getfenv(2)[i] = v
+                getfenv(1)[i] = v
+	            getfenv(0)[i] = v
+	            getfenv(debug.info(0, 'f'))[i] = v
+	            getfenv(debug.info(1, 'f'))[i] = v
+	            getfenv(debug.info(2, 'f'))[i] = v
+            end
+	        s("getgenv", function() return { game = game } end)
             return loadstring([[
-				if getgenv then getgenv = nil end
-	            local getgenv = function() return { game = game } end
-	            getfenv(debug.info(0, 'f')).getgenv = getgenv
-	            getfenv(debug.info(1, 'f')).getgenv = getgenv
-	            getfenv(debug.info(2, 'f')).getgenv = getgenv
+				getgenv = nil
+	            getgenv = function() return { game = game } end
+                local function s(i, v)
+	                getfenv(2)[i] = v
+                    getfenv(1)[i] = v
+	                getfenv(0)[i] = v
+	                getfenv(debug.info(0, 'f'))[i] = v
+	                getfenv(debug.info(1, 'f'))[i] = v
+	                getfenv(debug.info(2, 'f'))[i] = v
+                end
+	            s("getgenv", function() return { game = game } end)
                 local res, why = pcall(function() -- help me to replace that check please
                     local S = Game:GetService("ScriptContext")
 
