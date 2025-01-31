@@ -16,15 +16,6 @@ end
 
 local cache = {};
 cache.getgenv = getgenv;
-getgenv().getgenv = nil;
-getgenv = nil;
-local FAKE_ENV = {};
-
-function getgenv()
-    return FAKE_ENV;
-end
-
-FAKE_ENV = { game = game, loadstring = loadstring, getgenv = getgenv };
 
 local function s(i, v)
     getfenv(2)[i] = v;
@@ -35,6 +26,17 @@ local function s(i, v)
     getfenv(debug.info(1, "f"))[i] = v;
     getfenv(debug.info(2, "f"))[i] = v;
 end
+
+pcall(function()
+getgenv().getgenv = nil;
+getgenv = nil;
+local FAKE_ENV = {};
+
+function getgenv()
+    return FAKE_ENV;
+end
+
+FAKE_ENV = { game = game, loadstring = loadstring, getgenv = getgenv };
 
 s("getgenv", getgenv);
 
@@ -180,7 +182,7 @@ local BYPASSED_ENV = loadstring([===[
         ]=])()
     ]==])()
 ]===])();
-
+end)
 getgenv = cache.getgenv;
 getfenv(loadstring).getgenv = cache.getgenv;
 s("getgenv", cache.getgenv)
