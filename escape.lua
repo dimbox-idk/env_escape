@@ -4,40 +4,34 @@ if not loadstring then return "UnSupported", "loadstring = nil" end
 if type(loadstring) ~= 'function' then return "UnSupported", "loadstring != function" end
 
 local cache = {}
-cache.game = getgenv().game
-cache.Game = getgenv().Game
 cache.getgenv = getgenv
 
-getgenv().Game = nil
-Game = nil
-getfenv().Game = nil
-getfenv(0).Game = nil
-getfenv(1).Game = nil
+getgenv = nil
 
-getgenv = function() return { game = game } end
+getgenv = function() return {} end
 
 local BYPASSED_GAME = loadstring([===[
-	if getgenv then getgenv().Game = nil end
-	getgenv = function() return { game = game } end
+	if getgenv then getgenv = nil end
+	getgenv = function() return {} end
     return loadstring([==[
-		if getgenv then getgenv().Game = nil end
-	    getgenv = function() return { game = game } end
+		if getgenv then getgenv = nil end
+	    getgenv = function() return {} end
         return loadstring([=[
-			if getgenv then getgenv().Game = nil end
-	        getgenv = function() return { game = game } end
+			if getgenv then getgenv = nil end
+	        getgenv = function() return {} end
             return loadstring([[
-				if getgenv then getgenv().Game = nil end
-	            getgenv = function() return { game = game } end
-                local res, why = pcall(function()
+				if getgenv then getgenv = nil end
+	            getgenv = function() return {} end
+                local res, why = pcall(function() -- help me to replace that check please
                     local S = Game:GetService("ScriptContext")
 
-                    local file = "BYPASSED_GAME_TEST.TXT"
+                    local file = "BYPASSED_ENV_TEST.EXE"
 
                     local textToSave = "TEST"
                     local filereal = S:SaveScriptProfilingData(textToSave, file)
                 end)
                 if res then
-                    return Game
+                    return getfenv(0)
                 else
 	                return why
                 end
@@ -46,9 +40,4 @@ local BYPASSED_GAME = loadstring([===[
     ]==])()
 ]===])()
 getgenv = cache.getgenv
-getgenv().Game = cache.Game
-Game = cache.Game
-getfenv().Game = cache.Game
-getfenv(0).Game = cache.Game
-getfenv(1).Game = cache.Game
-return BYPASSED_GAME
+return BYPASSED_ENV
