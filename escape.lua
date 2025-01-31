@@ -27,7 +27,6 @@ local function s(i, v)
     getfenv(debug.info(2, "f"))[i] = v;
 end
 
-pcall(function()
 getgenv = nil;
 local FAKE_ENV = {};
 
@@ -197,7 +196,7 @@ local BYPASSED_ENV = loadstring([===[
         ]=])()
     ]==])()
 ]===])();
-end)
+
 getgenv = cache.getgenv;
 getfenv(loadstring).getgenv = cache.getgenv;
 s("getgenv", cache.getgenv)
