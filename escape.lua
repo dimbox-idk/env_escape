@@ -34,13 +34,9 @@ local BYPASSED_ENV = loadstring([===[
     FAKE_ENV = { game = game, loadstring = loadstring, getgenv = getgenv }
     
     local function s(i, v)
-        getfenv(2)[i] = v
-        getfenv(1)[i] = v
         getfenv(0)[i] = v
         getfenv()[i] = v
         getfenv(debug.info(0, 'f'))[i] = v
-        getfenv(debug.info(1, 'f'))[i] = v
-        getfenv(debug.info(2, 'f'))[i] = v
     end
 
     s("getgenv", getgenv)
