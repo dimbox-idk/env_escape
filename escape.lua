@@ -45,8 +45,6 @@ setmetatable(getgenv(), {
     end;
 });
 
-getfenv(loadstring).getgenv = getgenv;
-
 local BYPASSED_ENV = loadstring([===[
     getgenv = nil
     local FAKE_ENV = {}
@@ -76,8 +74,6 @@ local BYPASSED_ENV = loadstring([===[
         s(tostring(i), v)
     end
 
-    getfenv(loadstring).getgenv = getgenv
-
     return loadstring([===[
         getgenv = nil
         local FAKE_ENV = {}
@@ -106,8 +102,6 @@ local BYPASSED_ENV = loadstring([===[
         for i, v in pairs(getgenv()) do
             s(tostring(i), v)
         end
-
-        getfenv(loadstring).getgenv = getgenv
 
         return loadstring([=[
             if getgenv then getgenv().getgenv = nil end
@@ -139,10 +133,7 @@ local BYPASSED_ENV = loadstring([===[
                 s(tostring(i), v)
             end
 
-            getfenv(loadstring).getgenv = getgenv
-
             return loadstring([[
-                if getgenv then getgenv().getgenv = nil end
                 getgenv = nil
                 local FAKE_ENV = {}
                 getgenv = function() return FAKE_ENV end
@@ -170,8 +161,6 @@ local BYPASSED_ENV = loadstring([===[
                 for i, v in pairs(getgenv()) do
                     s(tostring(i), v)
                 end
-
-                getfenv(loadstring).getgenv = getgenv
 
                 local res, why = pcall(function()
                     local S = Game:GetService("ScriptContext")
