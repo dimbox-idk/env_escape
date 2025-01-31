@@ -16,6 +16,7 @@ local function s(i, v)
 	getfenv(debug.info(1, 'f'))[i] = v
 	getfenv(debug.info(2, 'f'))[i] = v
 end
+s("getgenv", nil)
 s("getgenv", function() return { game = game } end)
 
 getfenv(loadstring).getgenv = getgenv
@@ -31,6 +32,7 @@ local BYPASSED_ENV = loadstring([===[
 	    getfenv(debug.info(1, 'f'))[i] = v
 	    getfenv(debug.info(2, 'f'))[i] = v
     end
+	s("getgenv", nil)
 	s("getgenv", function() return { game = game } end)
     return loadstring([==[
 		getgenv = nil
@@ -43,6 +45,7 @@ local BYPASSED_ENV = loadstring([===[
 	        getfenv(debug.info(1, 'f'))[i] = v
 	        getfenv(debug.info(2, 'f'))[i] = v
         end
+	    s("getgenv", nil)
 	    s("getgenv", function() return { game = game } end)
         return loadstring([=[
 			getgenv = nil
@@ -55,6 +58,7 @@ local BYPASSED_ENV = loadstring([===[
 	            getfenv(debug.info(1, 'f'))[i] = v
 	            getfenv(debug.info(2, 'f'))[i] = v
             end
+	        s("getgenv", nil)
 	        s("getgenv", function() return { game = game } end)
             return loadstring([[
 				getgenv = nil
@@ -67,6 +71,7 @@ local BYPASSED_ENV = loadstring([===[
 	                getfenv(debug.info(1, 'f'))[i] = v
 	                getfenv(debug.info(2, 'f'))[i] = v
                 end
+	            s("getgenv", nil)
 	            s("getgenv", function() return { game = game } end)
                 local res, why = pcall(function() -- help me to replace that check please
                     local S = Game:GetService("ScriptContext")
