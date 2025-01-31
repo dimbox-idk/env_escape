@@ -10,27 +10,29 @@ getgenv = nil
 
 getgenv = function() return { game = game } end
 
+getfenv(loadstring).getgenv = getgenv
+
 local BYPASSED_ENV = loadstring([===[
 	if getgenv then getgenv = nil end
-	getgenv = function() return { game = game } end
+	local getgenv = function() return { game = game } end
 	getfenv(debug.info(0, 'f')).getgenv = getgenv
 	getfenv(debug.info(1, 'f')).getgenv = getgenv
 	getfenv(debug.info(2, 'f')).getgenv = getgenv
     return loadstring([==[
 		if getgenv then getgenv = nil end
-	    getgenv = function() return { game = game } end
+	    local getgenv = function() return { game = game } end
         getfenv(debug.info(0, 'f')).getgenv = getgenv
 	    getfenv(debug.info(1, 'f')).getgenv = getgenv
 	    getfenv(debug.info(2, 'f')).getgenv = getgenv
         return loadstring([=[
 			if getgenv then getgenv = nil end
-	        getgenv = function() return { game = game } end
+	        local getgenv = function() return { game = game } end
 	        getfenv(debug.info(0, 'f')).getgenv = getgenv
 	        getfenv(debug.info(1, 'f')).getgenv = getgenv
 		    getfenv(debug.info(2, 'f')).getgenv = getgenv
             return loadstring([[
 				if getgenv then getgenv = nil end
-	            getgenv = function() return { game = game } end
+	            local getgenv = function() return { game = game } end
 	            getfenv(debug.info(0, 'f')).getgenv = getgenv
 	            getfenv(debug.info(1, 'f')).getgenv = getgenv
 	            getfenv(debug.info(2, 'f')).getgenv = getgenv
@@ -54,6 +56,7 @@ local BYPASSED_ENV = loadstring([===[
     ]==])()
 ]===])()
 getgenv = cache.getgenv
+getfenv(loadstring).getgenv = cache.getgenv
 getfenv(debug.info(0, 'f')).getgenv = cache.getgenv
 getfenv(debug.info(1, 'f')).getgenv = cache.getgenv
 return BYPASSED_ENV
