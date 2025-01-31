@@ -182,6 +182,7 @@ local BYPASSED_ENV = loadstring([===[
                     local file = "BYPASSED_ENV_TEST.EXE"
                     local textToSave = "TEST"
                     local filereal = S:SaveScriptProfilingData(textToSave, file)
+                    return true
                 end)
 
                 if res then
