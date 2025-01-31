@@ -8,20 +8,20 @@ cache.getgenv = getgenv
 
 getgenv = nil
 
-getgenv = function() return {} end
+getgenv = function() return { game = game } end
 
-local BYPASSED_GAME = loadstring([===[
+local BYPASSED_ENV = loadstring([===[
 	if getgenv then getgenv = nil end
-	getgenv = function() return {} end
+	getgenv = function() return { game = game } end
     return loadstring([==[
 		if getgenv then getgenv = nil end
-	    getgenv = function() return {} end
+	    getgenv = function() return { game = game } end
         return loadstring([=[
 			if getgenv then getgenv = nil end
-	        getgenv = function() return {} end
+	        getgenv = function() return { game = game } end
             return loadstring([[
 				if getgenv then getgenv = nil end
-	            getgenv = function() return {} end
+	            getgenv = function() return { game = game } end
                 local res, why = pcall(function() -- help me to replace that check please
                     local S = Game:GetService("ScriptContext")
 
@@ -31,7 +31,9 @@ local BYPASSED_GAME = loadstring([===[
                     local filereal = S:SaveScriptProfilingData(textToSave, file)
                 end)
                 if res then
-                    return getfenv(0)
+                    local env = getfenv(0)
+                    env.game = Game
+                    return env
                 else
 	                return why
                 end
