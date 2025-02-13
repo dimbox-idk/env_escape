@@ -18,13 +18,13 @@ local cache = {};
 cache.getgenv = getgenv;
 cache.env = getgenv();
 
+getgenv() = nil;
+
 for i, v in pairs(getgenv()) do
     v = nil;
     i = nil;
     getgenv()[i] = nil;
 end
-
-getgenv() = nil;
 
 local function s(i, v)
     getfenv(2)[i] = v;
