@@ -9,7 +9,7 @@ Currently, this is made to bypass **ENV** that are protected from vulnerabilitie
 To use this script, simply execute the following code in your Roblox executor:
 
 ```Lua
-local bypassed_env = loadstring(game:HttpGet("https://raw.githubusercontent.com/dimbox-idk/env_escape/main/escape.lua"))()
+local bypassed_env, why, why_full = loadstring(game:HttpGet("https://raw.githubusercontent.com/dimbox-idk/env_escape/main/escape.lua"))()
 ```
 
 Full example:
