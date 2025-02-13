@@ -19,9 +19,11 @@ cache.getgenv = getgenv;
 cache.env = getgenv();
 
 for i, v in pairs(getgenv()) do
-    v = nil;
-    i = nil;
-    getgenv()[i] = nil;
+    if i ~= 'loadstring' and i ~= 'game' then
+        v = nil;
+        i = nil;
+        getgenv()[i] = nil;
+    end
 end
 
 local function s(i, v)
