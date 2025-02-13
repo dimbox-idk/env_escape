@@ -195,8 +195,6 @@ local BYPASSED_ENV = loadstring([====[
 getgenv = cache.getgenv;
 s("getgenv", cache.getgenv);
 
-getgenv() = cache.env;
-
 for i, v in pairs(cache.env) do
     getgenv()[i] = v;
 end
