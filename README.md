@@ -1,3 +1,5 @@
+### Someone, pls maintain this code, i am too lazy for that, and thanks
+
 # Education and Vulnerability Fix Purposes Only!
 
 This repository is created for **educational purposes** and to help developers fix vulnerabilities in their code. The tools and scripts provided here are intended for use in **secure environments** only.
